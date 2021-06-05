@@ -5,28 +5,7 @@ using UnityEngine;
 //using UnityEngine.UI;
 public class HeroController : MonoBehaviour
 {   
-
-    public float speedMove = 5.0f;
-    public float speedRotate = 200.0f;
-    private Animator animator;
-    public float x, y;
-
-    void Start(){
-        animator = GetComponent<Animator>();
-
-    }
-
-    void Update(){
-        x = Input.GetAxis("Horizontal");
-        y = Input.GetAxis("Vertical");
-        transform.Rotate(0, x * Time.deltaTime * speedRotate, 0);
-        transform.Translate(0, 0, y * Time.deltaTime * speedMove);
-
-        animator.SetFloat("SpeedX", x);
-        animator.SetFloat("SpeedY", y);
-    }
-
-    /*private Rigidbody rb;
+ private Rigidbody rb;
     public float speed;
     //public Transform particles;
 
@@ -44,18 +23,18 @@ public class HeroController : MonoBehaviour
     private AudioSource audioRecoleccion;
     private Animator animator;
 
-    //public GameObject poder;
+    public GameObject poder;
 
     //public ParticleSystem poderPiso;
     
-    public IEnumerator DetenerParticulas(ParticleSystem part){
+    /*public IEnumerator DetenerParticulas(ParticleSystem part){
 
         yield return new WaitForSecondsRealtime(5);
 
         part.Stop();
-    }
+    }*/
 
-    public IEnumerator Movimiento(){
+    /*public IEnumerator Movimiento(){
         while(true){
             if(Vector3.Distance(transform.position, cuboMovible.transform.position) < 6f ){
                 cuboMovible.transform.position = Vector3.Lerp(cuboMovible.transform.position,
@@ -65,7 +44,7 @@ public class HeroController : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.1f);
         }
         
-    }
+    }*/
 
     // Start is called before the first frame update
     void Start()
@@ -81,7 +60,7 @@ public class HeroController : MonoBehaviour
         //systemParticle3 = particles3.GetComponent<ParticleSystem>();
         //systemParticle4 = particles4.GetComponent<ParticleSystem>();
         //systemParticle.Stop();
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
         //systemParticle2.Stop();
         //systemParticle3.Stop();
@@ -96,37 +75,36 @@ public class HeroController : MonoBehaviour
         {
             Animar();
         }
-        if (Input.GetButtonDown("Fire2"))
+       /* if (Input.GetButtonDown("Fire2"))
         {
             LanzarPoder();
-        }
+        }*/
     }
 
     public void Animar() {
-        // animator.SetBool("isSendingMagic",true);
-        //StartCoroutine(Reiniciar());
+        animator.SetBool("IsSendingMagic",true);
+        StartCoroutine(Reiniciar());
     }
 
     public IEnumerator Reiniciar() {
-        animator.SetBool("isSendingMagic",true);
-        yield return new WaitForSecondsRealtime(1.0f);
+        animator.SetBool("IsSendingMagic",true);
+        yield return new WaitForSecondsRealtime(1.5f);
         poder.transform.position = transform.position;
         poder.SendMessage("Shoot");
-        animator.SetBool("isSendingMagic", false);
-        // animator.SetBool("isSendingMagic",false);
+        animator.SetBool("IsSendingMagic", false);
     }
 
     void FixedUpdate(){
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-        rb.AddForce(movement * speed);
+        //rb.AddForce(movement * speed);
         //Debug.Log(contador == enemigos ? "Temino el juego" : "faltan recolectables"); 
 
     }
 
     void OnTriggerEnter(Collider other){
-        if(other.gameObject.CompareTag("Recolectable")){
+      /*  if(other.gameObject.CompareTag("Recolectable")){
             contador += contador;
             audioRecoleccion.Play();
             position = transform.position;
@@ -134,8 +112,8 @@ public class HeroController : MonoBehaviour
             other.gameObject.SetActive(false);
             contador ++;
              Debug.Log("cantidad de elementos: " + contador); 
-            systemParticle.Play();
-            StartCoroutine(DetenerParticulas(systemParticle));
+            //systemParticle.Play();
+            //StartCoroutine(DetenerParticulas(systemParticle));
             //SceneManager.LoadScene(1);
             return;
         };
@@ -169,24 +147,24 @@ public class HeroController : MonoBehaviour
              Debug.Log("cantidad de elementos: " + contador); 
             //systemParticle4.Play();
             return;
-        }
+        }*/
 
     }
 
-    public void LanzarPoder() {
+    /*public void LanzarPoder() {
         StartCoroutine(LanzaPoderCoRoutine());
-    }
+    }*/
 
 
-    public IEnumerator LanzaPoderCoRoutine() {
+    /*public IEnumerator LanzaPoderCoRoutine() {
         animator.SetBool("LanzandoPoder", true);
         yield return new WaitForSecondsRealtime(3.0f);
         animator.SetBool("LanzandoPoder", false);
         poderPiso.Play();
         StartCoroutine(DetenerPoder());
-    }
+    }*/
 
-    public IEnumerator DetenerPoder() {
+   /* public IEnumerator DetenerPoder() {
         yield return new WaitForSecondsRealtime(1.5f);
         poderPiso.Stop();
     }*/

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ControlDisparo : MonoBehaviour
 {
     public GameObject player;
-    public float TiempoEntreDisparos = 1;
+    public float TiempoEntreDisparos = 1f;
     public float rango = 100f;
     float timer;
     Ray shootRay;
@@ -15,12 +15,12 @@ public class ControlDisparo : MonoBehaviour
     Light gunLight;
     float effectsDisplayTime = 1.2f;
 
-    ParticleSystem particulasImpacto;
+    //ParticleSystem particulasImpacto;
 
     // Start is called before the first frame update
     void Start()
     {
-        particulasImpacto = GetComponentInChildren<ParticleSystem>();
+        //particulasImpacto = GetComponentInChildren<ParticleSystem>();
     }
 
     /// se activa en cada renderizado del objeto
@@ -43,8 +43,8 @@ public class ControlDisparo : MonoBehaviour
     void Shoot()
     {
         Vector3 ubicacion = new Vector3(player.transform.position.x,
-            player.transform.position.y + 1.1f, player.transform.position.z
-            );
+            player.transform.position.y + 1.1f, player.transform.position.z);
+            
         timer = 0f;
         gunLine.enabled = true;
         gunLight.enabled = true;
@@ -54,14 +54,14 @@ public class ControlDisparo : MonoBehaviour
 
         if (Physics.Raycast(shootRay, out shootHit, rango, shootableMask))
         {            
-            // Destroy(shootHit.collider.gameObject);
-            ControlResistencia resistencia = shootHit.collider.gameObject.GetComponent<ControlResistencia>();
+            Destroy(shootHit.collider.gameObject);
+            /*ControlResistencia resistencia = shootHit.collider.gameObject.GetComponent<ControlResistencia>();
             if (resistencia != null)
             {
                 resistencia.RegistrarImpacto(shootHit.point);
-                particulasImpacto.transform.position = shootHit.point;
-                particulasImpacto.Play();
-            }
+                //particulasImpacto.transform.position = shootHit.point;
+                //particulasImpacto.Play();
+            }*/
             gunLine.SetPosition(1, shootHit.point);
         }
         else
