@@ -44,7 +44,7 @@ public class ControlDisparo : MonoBehaviour
     {
         Vector3 ubicacion = new Vector3(player.transform.position.x,
             player.transform.position.y + 1.1f, player.transform.position.z);
-            
+
         timer = 0f;
         gunLine.enabled = true;
         gunLight.enabled = true;
@@ -54,14 +54,14 @@ public class ControlDisparo : MonoBehaviour
 
         if (Physics.Raycast(shootRay, out shootHit, rango, shootableMask))
         {            
-            Destroy(shootHit.collider.gameObject);
-            /*ControlResistencia resistencia = shootHit.collider.gameObject.GetComponent<ControlResistencia>();
+            //Destroy(shootHit.collider.gameObject);
+            ControlResistencia resistencia = shootHit.collider.gameObject.GetComponent<ControlResistencia>();
             if (resistencia != null)
             {
                 resistencia.RegistrarImpacto(shootHit.point);
                 //particulasImpacto.transform.position = shootHit.point;
                 //particulasImpacto.Play();
-            }*/
+            }
             gunLine.SetPosition(1, shootHit.point);
         }
         else
