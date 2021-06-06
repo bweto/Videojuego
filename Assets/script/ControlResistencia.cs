@@ -5,7 +5,8 @@ using UnityEngine;
 public class ControlResistencia : MonoBehaviour
 {
     public int resistencia;
-    // Start is called before the first frame update
+    public AudioSource audioDestruirEnemigo;
+    public ParticleSystem particleExplotions;
     void Start()
     {
         
@@ -23,12 +24,20 @@ public class ControlResistencia : MonoBehaviour
         if (resistencia <= 0)
         {
             Destroy(transform.gameObject);
+            audioDestruirEnemigo.Play();
+            
         }
     }
 
      private void OnParticleCollision(GameObject other) {
         Debug.Log("Colision cubo");
         Destroy(transform.gameObject);
+    }
+
+    public IEnumerator ActivarParticulas() {
+        particleExplotions.Play();
+        yield return new WaitForSecondsRealtime(1.0f);
+        particleExplotions.Stop();
     }
 
 }

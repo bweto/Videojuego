@@ -5,28 +5,23 @@ using UnityEngine;
 //using UnityEngine.UI;
 public class HeroController : MonoBehaviour
 {   
- private Rigidbody rb;
+    
+    public GameObject poder;
     public float speed;
     //public Transform particles;
-
-    //public  GameObject cuboMovible;
+    //public GameObject cuboMovible;
+    //public GameObject greenCube;
+    //public ParticleSystem poderPiso;
+    //public float enemigos;
     //private ParticleSystem systemParticle;
-
+    private Rigidbody rb;
     private Vector3 position;
     private float contador;
-
-    //public float enemigos;
-    
-    private Vector3 positionGreenCube; 
-    //public GameObject greenCube;
-
-    private AudioSource audioRecoleccion;
+    private Vector3 positionGreenCube;
+    public AudioSource audioDisparo;
     private Animator animator;
-
-    public GameObject poder;
-
-    //public ParticleSystem poderPiso;
     
+
     /*public IEnumerator DetenerParticulas(ParticleSystem part){
 
         yield return new WaitForSecondsRealtime(5);
@@ -48,7 +43,7 @@ public class HeroController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {   
+    {   animator = GetComponent<Animator>();
         //("Movimiento");
         //contador = 0f;
         //audioRecoleccion = GetComponent<AudioSource>();
@@ -60,8 +55,6 @@ public class HeroController : MonoBehaviour
         //systemParticle3 = particles3.GetComponent<ParticleSystem>();
         //systemParticle4 = particles4.GetComponent<ParticleSystem>();
         //systemParticle.Stop();
-        animator = GetComponent<Animator>();
-
         //systemParticle2.Stop();
         //systemParticle3.Stop();
         //systemParticle4.Stop();
@@ -83,6 +76,7 @@ public class HeroController : MonoBehaviour
 
     public void Animar() {
         animator.SetBool("IsSendingMagic",true);
+        audioDisparo.Play();
         StartCoroutine(Reiniciar());
     }
 
