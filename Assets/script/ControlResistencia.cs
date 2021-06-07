@@ -23,9 +23,8 @@ public class ControlResistencia : MonoBehaviour
         resistencia--;
         if (resistencia <= 0)
         {
-            Destroy(transform.gameObject);
-            audioDestruirEnemigo.Play();
-            
+             StartCoroutine(ActivarParticulas(puntoImpacto));
+     
         }
     }
 
@@ -34,10 +33,13 @@ public class ControlResistencia : MonoBehaviour
         Destroy(transform.gameObject);
     }
 
-    public IEnumerator ActivarParticulas() {
+    public IEnumerator ActivarParticulas(Vector3 puntoImpacto) {
+        particleExplotions.transform.position = puntoImpacto;
         particleExplotions.Play();
+        audioDestruirEnemigo.Play();
         yield return new WaitForSecondsRealtime(1.0f);
         particleExplotions.Stop();
+        Destroy(transform.gameObject);
     }
 
 }
