@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 //using UnityEngine.SceneManagement;
-//using UnityEngine.UI;
+using UnityEngine.UI;
 public class HeroController : MonoBehaviour
 {   
     
@@ -20,6 +20,10 @@ public class HeroController : MonoBehaviour
     private Vector3 positionGreenCube;
     public AudioSource audioDisparo;
     private Animator animator;
+    public Text textPuntaje; 
+    private int puntajeValor = 0;
+    private int puntajeVida = 100;
+    public Text textVida; 
     
     public void GuardarPosicion(){
         PlayerPrefs.SetFloat("PosicionX", transform.position.x);
@@ -56,6 +60,8 @@ public class HeroController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   animator = GetComponent<Animator>();
+        textPuntaje.text = puntajeValor.ToString();
+        textVida.text = puntajeVida.ToString();
         //("Movimiento");
         //contador = 0f;
         //audioRecoleccion = GetComponent<AudioSource>();
@@ -80,10 +86,6 @@ public class HeroController : MonoBehaviour
         {
             Animar();
         }
-       /* if (Input.GetButtonDown("Fire2"))
-        {
-            LanzarPoder();
-        }*/
     }
 
     public void Animar() {
@@ -109,21 +111,17 @@ public class HeroController : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider other){
-      /*  if(other.gameObject.CompareTag("Recolectable")){
-            contador += contador;
-            audioRecoleccion.Play();
-            position = transform.position;
-            particles.position = position;
-            other.gameObject.SetActive(false);
-            contador ++;
-             Debug.Log("cantidad de elementos: " + contador); 
+    void OnTriggerEnter(Collider other) {
+        Debug.Log("obstaculo golpeado"); 
+        if(other.gameObject.CompareTag("Obstaculos")){
+            puntajeValor += 10;
+            Debug.Log("obstaculo golpeado"); 
             //systemParticle.Play();
             //StartCoroutine(DetenerParticulas(systemParticle));
             //SceneManager.LoadScene(1);
             return;
         };
-
+/*
         if(other.gameObject.CompareTag("yellow")){
             position = positionGreenCube;
             //particles2.position = position;
@@ -155,6 +153,10 @@ public class HeroController : MonoBehaviour
             return;
         }*/
 
+    }
+
+    public void Puntaje(int punto) {
+        puntajeValor += punto;
     }
 
     /*public void LanzarPoder() {

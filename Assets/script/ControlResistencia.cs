@@ -24,7 +24,6 @@ public class ControlResistencia : MonoBehaviour
         if (resistencia <= 0)
         {
              StartCoroutine(ActivarParticulas(puntoImpacto));
-     
         }
     }
 
@@ -40,6 +39,7 @@ public class ControlResistencia : MonoBehaviour
         yield return new WaitForSecondsRealtime(1.0f);
         particleExplotions.Stop();
         Destroy(transform.gameObject);
+       
     }
 
 }
