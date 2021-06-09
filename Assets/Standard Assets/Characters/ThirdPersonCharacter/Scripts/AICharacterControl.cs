@@ -25,9 +25,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
-            if (target != null)
+            
+            float diferenciaz = transform.position.z - target.position.z;
+            float diferenciax = transform.position.x - target.position.x;
+            Debug.Log("Diferencia: " + diferenciaz + diferenciax);
+            if (target != null &&  diferenciaz < 1.0f || diferenciax < 1.0f){
+                Debug.Log("Diferencia adentro: " + + diferenciaz + diferenciax);
                 agent.SetDestination(target.position);
-
+            }
+                
             if (agent.remainingDistance > agent.stoppingDistance)
                 character.Move(agent.desiredVelocity, false, false);
             else
